@@ -6,7 +6,6 @@ require (
 	github.com/gin-contrib/static v0.0.1
 	github.com/gin-gonic/gin v1.8.2
 	github.com/jackc/pgx/v4 v4.17.2
-	github.com/serjbibox/rest-api-template v0.0.0-20220709133232-1e2e48f7b9af
 )
 
 require (
