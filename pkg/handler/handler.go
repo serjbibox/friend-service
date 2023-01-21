@@ -3,7 +3,6 @@ package handler
 import (
 	"errors"
 
-	"github.com/gin-contrib/static"
 	"github.com/gin-gonic/gin"
 	"github.com/serjbibox/friend-service/pkg/storage"
 )
@@ -25,12 +24,17 @@ func New(storage *storage.Storage) (*Handler, error) {
 //Регистрация обработчиков запросов
 func (h *Handler) InitRoutes() *gin.Engine {
 	r := gin.Default()
-	r.Use(static.Serve("/", static.LocalFile("./webapp", true)))
-	r.GET("/news/:n", h.getNews)
+	r.GET("/user", h.getUser)
+	r.GET("/session", h.getSession)
+	r.GET("/anketa", h.getAnketa)
+	r.POST("/user", h.createUser)
+	r.POST("/session", h.createSession)
+	r.POST("/anketa", h.createAnketa)
+	r.PUT("/user", h.updateUser)
+	r.PUT("/session", h.updateSession)
+	r.PUT("/anketa", h.updateAnketa)
+	r.DELETE("/user", h.deleteUser)
+	r.DELETE("/session", h.deleteSession)
+	r.DELETE("/anketa", h.deleteAnketa)
 	return r
-}
-
-// Получение публикаций по заданному количеству
-func (h *Handler) getNews(c *gin.Context) {
-
 }

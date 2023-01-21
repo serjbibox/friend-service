@@ -11,8 +11,12 @@ type errorResponse struct {
 }
 
 //
-type statusResponse struct {
-	Status string `json:"status"`
+type messageResponse struct {
+	Message string `json:"message"`
+}
+
+type createResponse struct {
+	ID int `json:"id"`
 }
 
 func newErrorResponse(c *gin.Context, statusCode int, message string) {

@@ -1,0 +1,4 @@
+runtime: go116
+
+env_variables:
+    DbPass: "123456"

@@ -27,8 +27,8 @@ func (s *SessionPostgres) Get(id int) (models.Session, error) {
 }
 
 // Создание нового списка публикаций
-func (s *SessionPostgres) Create(u models.Session) error {
-	return nil
+func (s *SessionPostgres) Create(u models.Session) (int, error) {
+	return -1, nil
 }
 
 // Создание нового списка публикаций

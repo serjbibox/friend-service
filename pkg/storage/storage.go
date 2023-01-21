@@ -9,21 +9,21 @@ import (
 )
 
 type User interface {
-	Create(models.User) error
+	Create(models.User) (int, error)
 	Get(id int) (models.User, error)
 	Update(models.User) error
 	Delete(id int) error
 }
 
 type Session interface {
-	Create(models.Session) error
+	Create(models.Session) (int, error)
 	Get(id int) (models.Session, error)
 	Update(models.Session) error
 	Delete(id int) error
 }
 
 type Anketa interface {
-	Create(models.Anketa) error
+	Create(models.Anketa) (int, error)
 	Get(id int) (models.Anketa, error)
 	Update(models.Anketa) error
 	Delete(id int) error

@@ -19,8 +19,14 @@ type config struct {
 
 var ctx = context.Background()
 
+// @title          API для платформы ДРУГ
+// @version        1.0
+// @description    API для взаимодействия с сервером платформы ДРУГ.
+// @contact.name   API Support
+// @contact.email  serj_bibox@mail.ru
+// @BasePath
 func main() {
-	c, err := readConfig("./config.json")
+	c, err := readConfig("./cmd/config.json")
 	if err != nil {
 		log.Fatal(err)
 	}

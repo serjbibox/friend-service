@@ -1,16 +1,10 @@
 {
-   "rss":[
-      "https://blog.jetbrains.com/go/feed/",
-      "https://forum.golangbridge.org/latest.rss",
-      "https://habr.com/ru/rss/best/daily/?fl=ru"
-   ],
-   "request_period": 1,
    "postgres_settings":{
-      "username": "news_service",
-      "host": "db_postgres",
+      "username": "serj",
+      "host": "192.168.0.109",
       "port": "5432",
-      "dbname": "gonews",
+      "dbname": "frienddb",
       "sslmode": "disable",
-      "envname": "DbPwd"
+      "envname": "DbPass"
    }
 }

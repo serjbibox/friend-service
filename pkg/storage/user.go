@@ -2,6 +2,7 @@ package storage
 
 import (
 	"context"
+	"fmt"
 
 	"github.com/jackc/pgx/v4/pgxpool"
 	"github.com/serjbibox/friend-service/pkg/models"
@@ -23,12 +24,14 @@ func newUserPostgres(ctx context.Context, db *pgxpool.Pool) User {
 
 // Получение публикаций по заданному количеству
 func (s *UserPostgres) Get(id int) (models.User, error) {
+
 	return models.User{}, nil
 }
 
 // Создание нового списка публикаций
-func (s *UserPostgres) Create(u models.User) error {
-	return nil
+func (s *UserPostgres) Create(u models.User) (int, error) {
+	fmt.Println("Сделаль!")
+	return -1, nil
 }
 
 // Создание нового списка публикаций

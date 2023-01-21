@@ -27,8 +27,8 @@ func (s *AnketaPostgres) Get(id int) (models.Anketa, error) {
 }
 
 // Создание нового списка публикаций
-func (s *AnketaPostgres) Create(u models.Anketa) error {
-	return nil
+func (s *AnketaPostgres) Create(u models.Anketa) (int, error) {
+	return -1, nil
 }
 
 // Создание нового списка публикаций

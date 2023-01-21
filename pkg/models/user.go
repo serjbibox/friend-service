@@ -1,15 +1,16 @@
 package models
 
-// @Description Структура карточки пользователя в теле запроса POST /v1/auth/register
+// @Description Структура данных пользователя
 type User struct {
 	ID       int    `json:"id" example:"11234"`
-	Role     string `json:"role" example:"client"`
-	Phone    string `json:"phone" example:"+79167003020"`
-	Login    string `json:"login" example:"rubella19"`
+	Role     string `json:"role" example:"client (psychologist, moderator)"`
+	Phone    string `json:"phone" example:"+79161234567"`
+	Login    string `json:"login" example:"somelogin"`
 	Password string `json:"password" example:"1Qwerty!"`
 	Name     string `json:"name" example:"Анастасия"`
-	Birth    string `json:"birth" example:"2000-07-28"`
-	Tag      string `json:"tg" example:"@Rubella19"`
-	Video    string `json:"video_url" example:"videourl"`
+	Age      int    `json:"age" example:"35"`
+	Tag      string `json:"tag" example:"@user"`
+	Video    string `json:"video_url" example:"video url"`
 	Email    string `json:"email" example:"some.mail@gmail.com"`
+	Anketa   Anketa `json:"anketa"`
 }
