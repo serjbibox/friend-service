@@ -43,7 +43,7 @@ func main() {
 	if err != nil {
 		log.Fatal(err)
 	}
-	handlers, err := handler.New(s)
+	handlers, err := handler.NewHandler(s)
 	if err != nil {
 		log.Fatal(err)
 	}
