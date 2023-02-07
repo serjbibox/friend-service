@@ -12,6 +12,7 @@ import (
 	"github.com/serjbibox/friend-service/pkg/storage/postgresql"
 )
 
+//new comment
 // Конфигурация приложения
 type config struct {
 	PostgresConfig postgresql.PostgresConfig `json:"postgres_settings"`
