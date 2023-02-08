@@ -49,6 +49,7 @@ func newAuthMiddleWare() (*jwt.GinJWTMiddleware, error) {
 		},
 		IdentityHandler: func(c *gin.Context) interface{} {
 			claims := jwt.ExtractClaims(c)
+			//log.Println("identity", c)
 			return &User{
 				UserName: claims[identityKey].(string),
 			}
@@ -72,7 +73,7 @@ func newAuthMiddleWare() (*jwt.GinJWTMiddleware, error) {
 			return nil, jwt.ErrFailedAuthentication
 		},
 		Authorizator: func(data interface{}, c *gin.Context) bool {
-			if v, ok := data.(*User); ok && v.UserName == "admin" {
+			if v, ok := data.(*User); ok && v.UserName == "test" {
 				return true
 			}
 

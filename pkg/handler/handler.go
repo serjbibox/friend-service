@@ -31,7 +31,6 @@ func (h *Handler) InitRoutes() *gin.Engine {
 		log.Fatalf("ошибка инициализации сервиса аутентификации: %s", err.Error())
 	}
 	r.POST("/login", authMiddleware.LoginHandler)
-
 	r.NoRoute(authMiddleware.MiddlewareFunc(), func(c *gin.Context) {
 		claims := jwt.ExtractClaims(c)
 		log.Printf("NoRoute claims: %#v\n", claims)
