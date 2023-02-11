@@ -10,9 +10,13 @@ type errorResponse struct {
 	Message string `json:"message"`
 }
 
-//
 type messageResponse struct {
 	Message string `json:"message"`
+}
+
+type identityResponse struct {
+	Phone   string `json:"phone" example:"+79161234567"`
+	Message string `json:"message" example:"idented"`
 }
 
 type createResponse struct {

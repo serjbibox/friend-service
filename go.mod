@@ -4,6 +4,7 @@ go 1.18
 
 require (
 	github.com/appleboy/gin-jwt/v2 v2.9.1
+	github.com/dex35/smsru v0.0.0-20210330080236-e0e48e6dcef4
 	github.com/gin-gonic/gin v1.8.2
 	github.com/jackc/pgx/v4 v4.17.2
 )

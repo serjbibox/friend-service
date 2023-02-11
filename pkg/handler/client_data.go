@@ -9,14 +9,14 @@ import (
 )
 
 // Создание нового пользователя
-func (h *Handler) createAnketa(c *gin.Context) {
-	a := models.Anketa{}
+func (h *Handler) createClientData(c *gin.Context) {
+	a := models.ClientData{}
 	err := c.BindJSON(&a)
 	if err != nil {
 		newErrorResponse(c, http.StatusInternalServerError, err.Error())
 		return
 	}
-	id, err := h.storage.Anketa.Create(a)
+	id, err := h.storage.ClientData.Create(a)
 	if err != nil {
 		newErrorResponse(c, http.StatusInternalServerError, err.Error())
 		return
@@ -28,13 +28,13 @@ func (h *Handler) createAnketa(c *gin.Context) {
 }
 
 // Получение пользователя по ID
-func (h *Handler) getAnketa(c *gin.Context) {
+func (h *Handler) getClientData(c *gin.Context) {
 	id, err := strconv.Atoi(c.Query("id"))
 	if err != nil {
 		newErrorResponse(c, http.StatusInternalServerError, err.Error())
 		return
 	}
-	a, err := h.storage.Anketa.Get(id)
+	a, err := h.storage.ClientData.Get(id)
 	if err != nil {
 		newErrorResponse(c, http.StatusInternalServerError, err.Error())
 		return
@@ -45,14 +45,14 @@ func (h *Handler) getAnketa(c *gin.Context) {
 }
 
 // Обновление данных пользователя по ID
-func (h *Handler) updateAnketa(c *gin.Context) {
-	a := models.Anketa{}
+func (h *Handler) updateClientData(c *gin.Context) {
+	a := models.ClientData{}
 	err := c.BindJSON(&a)
 	if err != nil {
 		newErrorResponse(c, http.StatusInternalServerError, err.Error())
 		return
 	}
-	err = h.storage.Anketa.Update(a)
+	err = h.storage.ClientData.Update(a)
 	if err != nil {
 		newErrorResponse(c, http.StatusInternalServerError, err.Error())
 		return
@@ -64,13 +64,13 @@ func (h *Handler) updateAnketa(c *gin.Context) {
 }
 
 // Удаление данных пользователя по ID
-func (h *Handler) deleteAnketa(c *gin.Context) {
+func (h *Handler) deleteClientData(c *gin.Context) {
 	id, err := strconv.Atoi(c.Query("id"))
 	if err != nil {
 		newErrorResponse(c, http.StatusInternalServerError, err.Error())
 		return
 	}
-	err = h.storage.Anketa.Delete(id)
+	err = h.storage.ClientData.Delete(id)
 	if err != nil {
 		newErrorResponse(c, http.StatusInternalServerError, err.Error())
 		return
