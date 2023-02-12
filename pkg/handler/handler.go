@@ -38,24 +38,13 @@ func (h *Handler) InitRoutes() *gin.Engine {
 	})
 	r.POST("/sign-up", h.identityUser)
 	r.POST("/sign-in", authMiddleware.LoginHandler)
-
 	user := r.Group("/user")
-	// Refresh time can be longer than token timeout
 	user.GET("/refresh_token", authMiddleware.RefreshHandler)
 	user.Use(authMiddleware.MiddlewareFunc())
 	{
 		user.GET("/", h.getUser)
+		user.PUT("/", h.updateUser)
+		user.DELETE("/", h.deleteUser)
 	}
-	r.GET("/session", h.getSession)
-	r.GET("/anketa", h.getClientData)
-	r.POST("/user", h.createUser)
-	r.POST("/session", h.createSession)
-	r.POST("/anketa", h.createClientData)
-	r.PUT("/user", h.updateUser)
-	r.PUT("/session", h.updateSession)
-	r.PUT("/anketa", h.updateClientData)
-	r.DELETE("/user", h.deleteUser)
-	r.DELETE("/session", h.deleteSession)
-	r.DELETE("/anketa", h.deleteClientData)
 	return r
 }

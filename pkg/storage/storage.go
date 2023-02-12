@@ -10,7 +10,8 @@ import (
 
 type User interface {
 	Create(models.User) (int, error)
-	Get(id int) (models.User, error)
+	GetById(id int) (models.User, error)
+	GetByPhone(phone string) (models.User, error)
 	Update(models.User) error
 	Delete(id int) error
 }

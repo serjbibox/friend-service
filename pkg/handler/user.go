@@ -34,7 +34,7 @@ func (h *Handler) getUser(c *gin.Context) {
 		newErrorResponse(c, http.StatusInternalServerError, err.Error())
 		return
 	}
-	u, err := h.storage.User.Get(id)
+	u, err := h.storage.User.GetById(id)
 	if err != nil {
 		newErrorResponse(c, http.StatusInternalServerError, err.Error())
 		return

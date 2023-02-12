@@ -15,13 +15,19 @@ type login struct {
 	Role     string `form:"role" json:"role" binding:"required"`
 }
 
-var identityKey = "phone"
+type user struct {
+	Phone string `form:"phone" json:"phone" binding:"required"`
+	Role  string `form:"role" json:"role" binding:"required"`
+}
+
+var phone = "phone"
+var role = "role"
 
 func helloHandler(c *gin.Context) {
 	claims := jwt.ExtractClaims(c)
-	user, _ := c.Get(identityKey)
+	user, _ := c.Get(phone)
 	c.JSON(200, gin.H{
-		"userID": claims[identityKey],
+		"userID": claims[phone],
 		"Phone":  user.(*models.User).Phone,
 		"text":   "Hello World.",
 	})
@@ -34,32 +40,55 @@ func (h *Handler) newAuthMiddleWare() (*jwt.GinJWTMiddleware, error) {
 		Key:         []byte("secret key"),
 		Timeout:     time.Hour,
 		MaxRefresh:  time.Hour,
-		IdentityKey: identityKey,
+		IdentityKey: phone,
 		PayloadFunc: func(data interface{}) jwt.MapClaims {
 			log.Println("PayloadFunc")
-			if v, ok := data.(*models.User); ok {
+			if v, ok := data.(*user); ok {
 				return jwt.MapClaims{
-					identityKey: v.Role,
+					phone: v.Phone,
+					role:  v.Role,
 				}
 			}
 			return jwt.MapClaims{}
 		},
 		IdentityHandler: func(c *gin.Context) interface{} {
-			log.Println("IdentityHandler")
 			claims := jwt.ExtractClaims(c)
-			return &models.User{
-				Role: claims[identityKey].(string),
+			log.Println("IdentityHandler", claims[phone].(string), claims[role].(string))
+			return &user{
+				Phone: claims[phone].(string),
+				Role:  claims[role].(string),
 			}
 		},
 		Authenticator: func(c *gin.Context) (interface{}, error) {
 			log.Println("Authenticator")
-			u, err := h.signIn(c)
-			return u, err
+			var loginVals login
+			if err := c.ShouldBind(&loginVals); err != nil {
+				return "", jwt.ErrMissingLoginValues
+			}
+			phone := loginVals.Phone
+			password := loginVals.Password
+			role := loginVals.Role
+			u, err := h.storage.User.GetByPhone(phone)
+			if err != nil {
+				return nil, err
+			}
+			//заглушка
+			u.Phone = "996550269716"
+			u.Password = "123456"
+			if (phone == u.Phone) && (password == u.Password) {
+				u := &user{
+					Phone: phone,
+					Role:  role,
+				}
+				return u, nil
+			}
+			//заглушка
+			return nil, jwt.ErrFailedAuthentication
 		},
 		Authorizator: func(data interface{}, c *gin.Context) bool {
 			log.Println("Authorizator")
 			log.Println(data)
-			if v, ok := data.(*models.User); ok && v.Role == client {
+			if v, ok := data.(*user); ok && v.Role == client {
 				return true
 			}
 
