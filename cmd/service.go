@@ -27,7 +27,7 @@ var ctx = context.Background()
 // @contact.email  serj_bibox@mail.ru
 // @BasePath
 func main() {
-	c, err := readConfig("./cmd/config.json")
+	c, err := readConfig("./config.json")
 	if err != nil {
 		log.Fatal(err)
 	}
