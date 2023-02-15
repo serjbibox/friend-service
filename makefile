@@ -1,3 +1,23 @@
+PUBLIC_REGISTRY_HOST=docker.io
+PUBLIC_REGISTRY_OWNER=serjbibox
+PUBLIC_REGISTRY_APP_NAME=friend-service
+
+CI_COMMIT_REF_NAME=latest
+
+all: deps build
+
+deps:
+	@go mod download
+	@echo "Dependencies installed successfully"
+
+build:
+	go build ./cmd
+
+image:
+	@docker build -t ${PUBLIC_REGISTRY_HOST}/${PUBLIC_REGISTRY_OWNER}/${PUBLIC_REGISTRY_APP_NAME}:${CI_COMMIT_REF_NAME} ./
+	@docker push ${PUBLIC_REGISTRY_HOST}/${PUBLIC_REGISTRY_OWNER}/${PUBLIC_REGISTRY_APP_NAME}:${CI_COMMIT_REF_NAME}
+	
+
 init: docker-down-clear \
 	docker-pull docker-build docker-up \
 
