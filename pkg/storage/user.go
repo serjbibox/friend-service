@@ -2,10 +2,10 @@ package storage
 
 import (
 	"context"
-	"fmt"
 
 	"github.com/jackc/pgx/v4/pgxpool"
 	"github.com/serjbibox/friend-service/pkg/models"
+	"golang.org/x/crypto/bcrypt"
 )
 
 // Объект, реализующий интерфейс работы с таблицей posts PostgreSQL.
@@ -34,18 +34,29 @@ func (s *UserPostgres) GetByPhone(phone string) (models.User, error) {
 	return models.User{}, nil
 }
 
-// Создание нового списка публикаций
+// Создание нового пользователя
 func (s *UserPostgres) Create(u models.User) (int, error) {
-	fmt.Println("Сделаль!")
-	return -1, nil
+	id := 0
+	hashedPassword, err := bcrypt.GenerateFromPassword([]byte(u.Password), bcrypt.DefaultCost)
+	if err != nil {
+		return -1, err
+	}
+	query := `
+	INSERT INTO users(phone, role, password)
+	VALUES ($1, $2, $3)`
+	err = s.db.QueryRow(context.Background(), query, u.Phone, u.Role, hashedPassword).Scan(&id)
+	if err != nil {
+		return -1, err
+	}
+	return id, nil
 }
 
-// Создание нового списка публикаций
+// Обновление пользователя
 func (s *UserPostgres) Update(u models.User) error {
 	return nil
 }
 
-// Получение публикаций по заданному количеству
+// Удаление пользователя
 func (s *UserPostgres) Delete(id int) error {
 	return nil
 }
