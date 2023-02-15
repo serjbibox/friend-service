@@ -2,6 +2,7 @@ package storage
 
 import (
 	"context"
+	"log"
 
 	"github.com/jackc/pgx/v4/pgxpool"
 	"github.com/serjbibox/friend-service/pkg/models"
@@ -43,8 +44,9 @@ func (s *UserPostgres) Create(u models.User) (int, error) {
 	}
 	query := `
 	INSERT INTO users(phone, role, password)
-	VALUES ($1, $2, $3)`
+	VALUES ($1, $2, $3) RETURNING ID;`
 	err = s.db.QueryRow(context.Background(), query, u.Phone, u.Role, hashedPassword).Scan(&id)
+	log.Println(id)
 	if err != nil {
 		return -1, err
 	}
