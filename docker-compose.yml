@@ -34,7 +34,7 @@ services:
       - "-c"
       - "pg_stat_statements.track=all"
     environment:
-      POSTGRES_DB: "friend-service"
+      POSTGRES_DB: "frienddb"
       POSTGRES_USER: "friend-service"
       POSTGRES_PASSWORD: "qwerty"
       PGDATA: "/var/lib/postgresql/data/pgdata"
@@ -63,7 +63,7 @@ services:
       dockerfile: ./Dockerfile
     restart: unless-stopped
     environment:
-      - DbPwd=qwerty
+      - DbPass=qwerty
     ports:
       - 80:8080
  
