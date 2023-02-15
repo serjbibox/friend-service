@@ -12,7 +12,7 @@ import (
 	"github.com/serjbibox/friend-service/pkg/storage/postgresql"
 )
 
-//new comment
+// new comment
 // Конфигурация приложения
 type config struct {
 	PostgresConfig postgresql.PostgresConfig `json:"postgres_settings"`
@@ -27,7 +27,7 @@ var ctx = context.Background()
 // @contact.email  serj_bibox@mail.ru
 // @BasePath
 func main() {
-	c, err := readConfig("./cmd/config.json")
+	c, err := readConfig("./config.json")
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -52,7 +52,7 @@ func main() {
 	log.Fatal(srv.Run(server.HTTP_PORT, handlers.InitRoutes()))
 }
 
-//Чтение JSON файла конфигурации
+// Чтение JSON файла конфигурации
 func readConfig(path string) (*config, error) {
 	c, err := ioutil.ReadFile(path)
 	if err != nil {
