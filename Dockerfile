@@ -8,7 +8,7 @@ RUN cp go/src/friend-service/cmd/config.json go/bin
 
 FROM ubuntu:latest
 RUN mkdir -p friend-service
-WORKDIR /
+WORKDIR /friend-service
 COPY --from=build_stage /go/bin .
 RUN mv cmd friend-service
 #RUN apk add libc6-compat
