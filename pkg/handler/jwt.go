@@ -88,7 +88,7 @@ func (h *Handler) newAuthMiddleWare() (*jwt.GinJWTMiddleware, error) {
 		Authorizator: func(data interface{}, c *gin.Context) bool {
 			log.Println("Authorizator")
 			log.Println(data)
-			if v, ok := data.(*user); ok && v.Role == client {
+			if v, ok := data.(*user); ok && (v.Role == client || v.Role == psychologist || v.Role == moderator) {
 				return true
 			}
 
