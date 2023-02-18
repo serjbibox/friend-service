@@ -1,9 +1,9 @@
 {
    "postgres_settings":{
-      "username": "friend-service",
+      "username": "droog-service",
       "host": "db_postgres",
       "port": "5432",
-      "dbname": "frienddb",
+      "dbname": "droogdb",
       "sslmode": "disable",
       "envname": "DbPass"
    }
