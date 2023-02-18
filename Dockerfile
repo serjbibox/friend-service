@@ -11,6 +11,5 @@ RUN mkdir -p friend-service
 WORKDIR /friend-service
 COPY --from=build_stage /go/bin .
 RUN mv cmd friend-service
-#RUN apk add libc6-compat
 ENTRYPOINT ./friend-service
 EXPOSE 1080

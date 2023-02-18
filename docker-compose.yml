@@ -57,7 +57,7 @@ services:
       resources:
         limits:
           cpus: '1'
-          memory: 4G
+          memory: 1G
   droog:
     depends_on:
       - db_postgres  
