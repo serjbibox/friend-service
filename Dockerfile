@@ -13,4 +13,4 @@ COPY --from=build_stage /go/bin .
 RUN mv cmd friend-service
 #RUN apk add libc6-compat
 ENTRYPOINT ./friend-service
-EXPOSE 80
+EXPOSE 1080

@@ -43,29 +43,37 @@ services:
     ports:
       - "5438:5432"
     healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U friend-service -d friend-service"]
+      test: ["CMD-SHELL", "pg_isready -U friend-service -d frienddb"]
       interval: 10s
       timeout: 5s
       retries: 5
       start_period: 10s
     restart: unless-stopped
+    logging:
+      driver: syslog
+      options:
+        tag: docker-pg   
     deploy:
       resources:
         limits:
           cpus: '1'
           memory: 4G
-  friend-service:
+  droog:
     depends_on:
       - db_postgres  
-    container_name: friend-service_container
+    container_name: droog_container
     build:
       context: .
       dockerfile: ./Dockerfile
     restart: unless-stopped
+    logging:
+      driver: syslog
+      options:
+        tag: docker-droog     
     environment:
       - DbPass=qwerty
     ports:
-      - 80:8080
+      - 1080:8080
  
     
      
