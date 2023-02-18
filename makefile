@@ -37,9 +37,8 @@ stop:
 	docker-compose -f docker-compose.yml down
 run:
 	docker-compose -f docker-compose.yml up -d
-	
-log: docker-compose logs -f -t		
-
+log: 
+	docker-compose logs -f -t		
 test:
 	docker-compose -f docker-compose_test.yml up --build --abort-on-container-exit
 	docker-compose -f docker-compose_test.yml down --volumes

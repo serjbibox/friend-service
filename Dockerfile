@@ -1,15 +1,15 @@
 FROM golang:1.18 AS build_stage
-RUN mkdir -p go/src/friend-service
-WORKDIR /go/src/friend-service
+RUN mkdir -p go/src/droog
+WORKDIR /go/src/droog
 COPY ./ ./
 RUN go env -w GO111MODULE=auto && go install ./cmd
 WORKDIR /
-RUN cp go/src/friend-service/cmd/config.json go/bin
+RUN cp go/src/droog/cmd/config.json go/bin
 
 FROM ubuntu:20.04
-RUN mkdir -p friend-service
-WORKDIR /friend-service
+RUN mkdir -p droog
+WORKDIR /droog
 COPY --from=build_stage /go/bin .
-RUN mv cmd friend-service
-ENTRYPOINT ./friend-service
+RUN mv cmd droog
+ENTRYPOINT ./droog
 EXPOSE 1080
